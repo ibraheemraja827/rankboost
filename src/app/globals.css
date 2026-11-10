@@ -1,26 +1,253 @@
 @import "tailwindcss";
 
+html { scroll-behavior: smooth; }
+
+/* ---------- TAMx colors ---------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg: #020202;
+  --card: rgba(30, 41, 59, 0.6);
+  --border: rgba(246, 246, 253, 0.1);
+  --primary: #3e3f7e;
+  --primary-2: #a2a3e9;
+  --primary-3: #696aac;
+  --muted: #64748b;
+  --text: #f6f6fd;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(60rem 40rem at -10% -10%, rgba(62, 63, 126, 0.4), transparent 60%),
+    radial-gradient(40rem 30rem at 110% 110%, rgba(105, 106, 172, 0.14), transparent 60%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #3e3f7e, #696aac);
+  color: #f6f6fd;
+  border-radius: 9999px;
+  box-shadow: 0 0 24px rgba(105, 106, 172, 0.35);
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  will-change: transform, opacity;
+}
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-zoom { transform: translateY(16px); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- Page load animations ---------- */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+@keyframes slideLeft { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: none; } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: none; } }
+.anim-fade-up { animation: fadeUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.anim-down { animation: fadeDown 0.8s ease both; }
+.anim-left { animation: slideLeft 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.anim-right { animation: slideRight 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* ---------- Loops ---------- */
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.float { animation: floaty 6s ease-in-out infinite; }
+
+@keyframes shimmer { to { background-position: 200% center; } }
+.shimmer {
+  background: linear-gradient(90deg, #a2a3e9, #c7c8f2, #696aac, #a2a3e9);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 24px rgba(105, 106, 172, 0.35); }
+  50% { box-shadow: 0 0 44px rgba(162, 163, 233, 0.55); }
+}
+.pulse-glow { animation: pulseGlow 2.8s ease-in-out infinite; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee { animation: marquee 35s linear infinite; }
+
+@keyframes orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, -40px) scale(1.15); }
+}
+.orb { animation: orb 14s ease-in-out infinite; }
+
+/* ---------- Globe ---------- */
+@keyframes meridian { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.03); } }
+.meridian { transform-box: fill-box; transform-origin: center; animation: meridian 14s linear infinite; }
+@keyframes dots { to { stroke-dashoffset: -240; } }
+.lat-dots { animation: dots 40s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin 50s linear infinite; }
+@keyframes glowPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.glow-pulse { animation: glowPulse 5s ease-in-out infinite; }
+
+/* ---------- Cards ---------- */
+.card-hover { transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: #696aac;
+  box-shadow: 0 12px 40px rgba(105, 106, 172, 0.25);
+}
+
+/* Jinhein motion se takleef hoti hai unke liye animation band */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ---------- Animated background (dashboard + landing + login) ---------- */
+
+/* 1. Grid jo aahista aahista sarakti hai */
+@keyframes gridMove {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 48px 48px, 48px 48px; }
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(162, 163, 233, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(162, 163, 233, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 25%, transparent 78%);
+  animation: none;
+}
+
+/* 2. Glow jo saaf hilti aur saans leti hai */
+@keyframes bgDrift {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  33%  { transform: translate(60px, -40px) scale(1.15); opacity: 1; }
+  66%  { transform: translate(-50px, 30px) scale(1.05); opacity: 0.85; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+}
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  inset: -10%;
+  background:
+    radial-gradient(34rem 26rem at 85% 15%, rgba(62, 63, 126, 0.40), transparent 65%),
+    radial-gradient(30rem 24rem at 15% 85%, rgba(105, 106, 172, 0.26), transparent 65%),
+    radial-gradient(22rem 18rem at 50% 50%, rgba(162, 163, 233, 0.08), transparent 65%);
+  animation: none;
+}
+
+/* 3. Roshni ki halki patti jo upar se neeche guzarti hai */
+@keyframes beam {
+  0%   { transform: translateY(-30vh); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateY(130vh); opacity: 0; }
+}
+html::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28vh;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(162, 163, 233, 0.06), transparent);
+  animation: none;
+}
+
+/* Cards: halka glass blur aur hover par chamak */
+.card {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(162, 163, 233, 0.3);
+  box-shadow: 0 8px 32px rgba(62, 63, 126, 0.22);
+}
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-size: 0.875rem;
+  color: rgba(162, 163, 233, 0.65);
+  border: 1px solid transparent;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.nav-item:hover {
+  transform: translateX(4px);
+  color: #c9caff;
+  background: linear-gradient(90deg, rgba(62, 63, 126, 0.35), rgba(62, 63, 126, 0.06)) !important;
+  border: 1px solid rgba(162, 163, 233, 0.45) !important;
+}
+
+.nav-item.active {
+  color: #ffffff !important;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(62, 63, 126, 0.7), rgba(62, 63, 126, 0.25)) !important;
+  border: 1px solid #a2a3e9 !important;
+  box-shadow: 0 8px 24px rgba(62, 63, 126, 0.55), 0 0 22px rgba(162, 163, 233, 0.35) !important;
+  animation: navGlowPulse 3s ease-in-out infinite;
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22%;
+  height: 56%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, #a2a3e9, #3e3f7e);
+  box-shadow: 0 0 10px #a2a3e9;
+}
+
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(162, 163, 233, 0.2), transparent);
+  transform: skewX(-20deg);
+  animation: navShine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes navGlowPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(62,63,126,0.45), 0 0 14px rgba(162,163,233,0.2); }
+  50%      { box-shadow: 0 10px 30px rgba(62,63,126,0.65), 0 0 28px rgba(162,163,233,0.4); }
+}
+
+@keyframes navShine {
+  0%, 60% { left: -60%; }
+  100%    { left: 130%; }
 }

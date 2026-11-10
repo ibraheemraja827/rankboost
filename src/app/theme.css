@@ -1,0 +1,192 @@
+/* =========================================================
+   RankBoost AI - theme.css
+   Ek hi file: sidebar nav style + poore project ka mobile responsive.
+   TAMx colors: #020202 bg, #3e3f7e primary, #a2a3e9 accent
+   ========================================================= */
+
+/* ---------- 1. Global safety (har page par) ---------- */
+body {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+p,
+h1,
+h2,
+h3,
+li {
+  overflow-wrap: break-word;
+}
+
+/* Tables aur code blocks mobile par side-scroll karein */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- 2. Sidebar nav (desktop) ---------- */
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: 14px;
+  font-size: 0.875rem;
+  color: rgba(162, 163, 233, 0.65);
+  border: 1px solid transparent;
+  overflow: hidden;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+    box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.nav-item:hover {
+  transform: translateX(4px);
+  color: #c9caff;
+  background: linear-gradient(90deg, rgba(62, 63, 126, 0.35), rgba(62, 63, 126, 0.06)) !important;
+  border: 1px solid rgba(162, 163, 233, 0.45) !important;
+}
+
+.nav-item svg {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.nav-item:hover svg {
+  transform: scale(1.15) rotate(-6deg);
+  filter: drop-shadow(0 0 6px rgba(162, 163, 233, 0.6));
+}
+
+.nav-item.active {
+  color: #ffffff !important;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(62, 63, 126, 0.7), rgba(62, 63, 126, 0.25)) !important;
+  border: 1px solid #a2a3e9 !important;
+  box-shadow: 0 8px 24px rgba(62, 63, 126, 0.55), 0 0 22px rgba(162, 163, 233, 0.35) !important;
+  animation: navGlowPulse 3s ease-in-out infinite;
+}
+
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22%;
+  height: 56%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(180deg, #a2a3e9, #3e3f7e);
+  box-shadow: 0 0 10px #a2a3e9;
+}
+
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(162, 163, 233, 0.2), transparent);
+  transform: skewX(-20deg);
+  animation: navShine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.nav-item.logout:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+@keyframes navGlowPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(62, 63, 126, 0.45), 0 0 14px rgba(162, 163, 233, 0.2); }
+  50%      { box-shadow: 0 10px 30px rgba(62, 63, 126, 0.65), 0 0 28px rgba(162, 163, 233, 0.4); }
+}
+
+@keyframes navShine {
+  0%, 60% { left: -60%; }
+  100%    { left: 130%; }
+}
+
+/* ---------- 3. Tablet (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  main {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+/* ---------- 4. Mobile (<= 768px) ---------- */
+@media (max-width: 768px) {
+  main {
+    padding: 1.25rem 1rem !important;
+  }
+
+  /* Headings chhoti screen par fit */
+  h1 { font-size: clamp(1.5rem, 6.5vw, 2.25rem) !important; line-height: 1.2; }
+  h2 { font-size: clamp(1.25rem, 5.5vw, 1.75rem) !important; line-height: 1.25; }
+  h3 { font-size: clamp(1.05rem, 4.5vw, 1.35rem) !important; }
+
+  /* Tailwind grids jo mobile ke liye responsive nahi likhe gaye */
+  [class~="grid-cols-3"],
+  [class~="grid-cols-4"],
+  [class~="grid-cols-5"],
+  [class~="grid-cols-6"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+
+
+  /* Cards / boxes ki paddings kam */
+  [class~="p-8"] { padding: 1.25rem !important; }
+  [class~="p-6"] { padding: 1rem !important; }
+
+  /* Touch-friendly buttons aur inputs */
+  button,
+  [role="button"],
+  input[type="submit"] {
+    min-height: 44px;
+  }
+
+  /* 16px font taake iPhone input par zoom na kare */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+    max-width: 100%;
+  }
+
+ 
+
+  /* Sidebar ke glow effects mobile pills par halke */
+  .nav-item.active {
+    animation: none;
+  }
+}
+
+/* ---------- 5. Chhote phones (<= 420px) ---------- */
+@media (max-width: 420px) {
+  [class~="grid-cols-2"],
+  [class~="grid-cols-3"],
+  [class~="grid-cols-4"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  main {
+    padding: 1rem 0.75rem !important;
+  }
+}
+
+/* ---------- 6. Motion kam chahne walon ke liye ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .nav-item,
+  .nav-item.active,
+  .nav-item.active::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
