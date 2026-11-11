@@ -1,4 +1,3 @@
-
 {
   "name": "rankboost",
   "version": "1.0.0",
@@ -11,8 +10,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",
-    "@tailwindcss/postcss": "^4.3.4",
     "@supabase/supabase-js": "^2.118.0",
+    "@tailwindcss/postcss": "^4.3.4",
+    "cheerio": "^1.2.0",
     "jspdf": "^4.2.1",
     "jszip": "^3.10.2",
     "lucide-react": "^0.462.0",
