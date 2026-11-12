@@ -251,3 +251,222 @@ html::before {
   0%, 60% { left: -60%; }
   100%    { left: 130%; }
 }
+
+/* ==========================================
+   GLOBAL RESPONSIVE FOUNDATION
+   Mobile, Tablet and Desktop
+========================================== */
+
+/* Consistent sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  overflow-x: clip;
+}
+
+/* Prevent text from getting cut */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+label,
+button {
+  overflow-wrap: break-word;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+/* Prevent flex and grid children from overflowing */
+.flex,
+.grid,
+[class*="flex-"],
+[class*="grid-"] {
+  min-width: 0;
+}
+
+.flex > *,
+.grid > * {
+  min-width: 0;
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+  max-width: 100%;
+  min-width: 0;
+}
+
+textarea {
+  overflow-wrap: break-word;
+}
+
+/* Tables */
+table {
+  max-width: 100%;
+}
+
+pre,
+code {
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   TABLET RESPONSIVE
+========================================== */
+
+@media (max-width: 1024px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    min-width: 320px;
+    background-attachment: scroll;
+  }
+
+  h1 {
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    line-height: 1.3;
+  }
+
+  p {
+    line-height: 1.65;
+  }
+
+  .card {
+    border-radius: 0.85rem;
+    padding-left: clamp(12px, 4vw, 20px);
+    padding-right: clamp(12px, 4vw, 20px);
+  }
+
+  .nav-item {
+    max-width: 100%;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .nav-item:hover {
+    transform: none;
+  }
+
+  .btn-primary {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Prevent oversized decorative backgrounds */
+  body::after {
+    inset: 0;
+  }
+
+  /* Keep tables accessible on small screens */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better form spacing */
+  input,
+  textarea,
+  select {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.65rem, 7vw, 2.25rem);
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 5.5vw, 1.75rem);
+  }
+
+  .card {
+    border-radius: 0.75rem;
+  }
+
+  .nav-item {
+    font-size: 0.82rem;
+  }
+
+  .btn-primary {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ==========================================
+   EXTRA SMALL MOBILE
+========================================== */
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

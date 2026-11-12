@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   Search, Sparkles, Globe, Download, TrendingUp, Zap, Check, ArrowRight,
@@ -100,13 +101,14 @@ const SAMPLE = [
   { n: "Image Alt Tags", s: "warning" },
   { n: "Content Depth", s: "error" },
 ];
+
 const PILL = {
   good: "bg-green-500/10 text-green-400",
   warning: "bg-orange-500/10 text-orange-400",
   error: "bg-red-500/10 text-red-400",
 };
-const PILL_LABEL = { good: "Good", warning: "Warning", error: "Error" };
 
+const PILL_LABEL = { good: "Good", warning: "Warning", error: "Error" };
 const DIRS3 = ["left", "up", "right"];
 const DIRS2 = ["left", "right"];
 const DIRS4 = ["left", "up", "up", "right"];
@@ -115,9 +117,11 @@ function Heading({ children, sub, eyebrow }) {
   return (
     <Reveal dir="up" className="mx-auto mb-12 max-w-2xl text-center">
       {eyebrow && (
-        <div className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--primary-2)]">{eyebrow}</div>
+        <div className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--primary-2)]">
+          {eyebrow}
+        </div>
       )}
-      <h2 className="mb-3 text-3xl font-light md:text-4xl">{children}</h2>
+      <h2 className="mb-3 text-2xl font-light sm:text-3xl md:text-4xl">{children}</h2>
       {sub && <p className="text-[var(--muted)]">{sub}</p>}
     </Reveal>
   );
@@ -129,34 +133,46 @@ const Em = ({ children }) => (
 
 export default function Landing() {
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative min-w-0 overflow-x-clip">
       <LoginGuard />
 
-      {/* Peeche tairte hue glow */}
+      {/* Background glows */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <div className="orb absolute -left-40 top-10 h-[420px] w-[420px] rounded-full bg-indigo-600/20 blur-3xl" />
         <div className="orb absolute -right-40 bottom-0 h-[380px] w-[380px] rounded-full bg-violet-500/15 blur-3xl" style={{ animationDelay: "-7s" }} />
       </div>
 
       {/* NAV */}
-      <nav className="anim-down sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" aria-label="RankBoost AI home">
+      <nav className="anim-down sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--bg)]/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+          <Link href="/" aria-label="RankBoost AI home" className="shrink-0">
             <Logo withName />
           </Link>
-          <div className="hidden items-center gap-7 text-sm text-[var(--muted)] lg:flex">
+
+          <div className="hidden items-center gap-5 text-sm text-[var(--muted)] lg:flex xl:gap-7">
             <a href="#features" className="hover:text-white">Features</a>
             <a href="#how" className="hover:text-white">How it works</a>
             <a href="#score" className="hover:text-white">Score guide</a>
             <a href="#guide" className="hover:text-white">Help guide</a>
             <a href="#faq" className="hover:text-white">FAQ</a>
           </div>
-          <NavAuth />
+
+          <div className="shrink-0">
+            <NavAuth />
+          </div>
+
+          <div className="flex w-full items-center gap-5 overflow-x-auto border-t border-[var(--border)] pt-3 text-sm text-[var(--muted)] lg:hidden">
+            <a href="#features" className="shrink-0 hover:text-white">Features</a>
+            <a href="#how" className="shrink-0 hover:text-white">How it works</a>
+            <a href="#score" className="shrink-0 hover:text-white">Score guide</a>
+            <a href="#guide" className="shrink-0 hover:text-white">Help guide</a>
+            <a href="#faq" className="shrink-0 hover:text-white">FAQ</a>
+          </div>
         </div>
       </nav>
 
-      {/* HERO: TAMx jaisa background */}
-      <section className="relative overflow-hidden">
+      {/* HERO */}
+      <section className="relative min-w-0 overflow-hidden">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div
             className="absolute -left-40 -top-56 h-[720px] w-[460px] -rotate-[38deg] blur-3xl"
@@ -170,64 +186,60 @@ export default function Landing() {
           </div>
         </div>
 
-        <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 pb-24 pt-16 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-6xl min-w-0 items-center gap-10 px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:grid-cols-2 lg:gap-12 lg:pb-24">
           <div
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 opacity-60 lg:left-[60%]"
+            className="pointer-events-none absolute left-1/2 top-[42%] h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 opacity-30 sm:h-[460px] sm:w-[460px] sm:opacity-40 lg:left-[60%] lg:top-1/2 lg:h-[620px] lg:w-[620px] lg:opacity-60"
             aria-hidden="true"
           >
             <HeroGlobe />
           </div>
 
-          <div className="relative z-10">
-            <span
-              className="anim-fade-up mb-5 inline-block rounded-full border border-[var(--border)] px-4 py-1 text-xs text-[var(--primary-2)]"
-              style={{ animationDelay: "0.1s" }}
-            >
+          <div className="relative z-10 min-w-0">
+            <span className="anim-fade-up mb-5 inline-block rounded-full border border-[var(--border)] px-4 py-1 text-xs text-[var(--primary-2)]" style={{ animationDelay: "0.1s" }}>
               AI-powered SEO platform by TAMx Technologies
             </span>
-            <h1
-              className="anim-left mb-5 text-4xl font-light leading-tight md:text-6xl"
-              style={{ animationDelay: "0.2s" }}
-            >
+
+            <h1 className="anim-left mb-5 text-3xl font-light leading-tight sm:text-4xl md:text-6xl" style={{ animationDelay: "0.2s" }}>
               Rank higher with <span className="shimmer font-bold italic">AI-powered</span> SEO
             </h1>
-            <p className="anim-left mb-4 max-w-xl text-lg text-[var(--muted)]" style={{ animationDelay: "0.35s" }}>
-              Paste your website link and RankBoost finds what is holding your site back in Google search, then
-              writes the fixes for you.
+
+            <p className="anim-left mb-4 max-w-xl text-base text-[var(--muted)] sm:text-lg" style={{ animationDelay: "0.35s" }}>
+              Paste your website link and RankBoost finds what is holding your site back in Google search, then writes the fixes for you.
             </p>
-            <p className="anim-left mb-8 max-w-xl text-[var(--muted)]" style={{ animationDelay: "0.42s" }}>
-              You get an SEO score out of 100, a mobile speed test, a crawl of up to 10 pages, and AI-written
-              titles, descriptions, keywords, alt text and schema. Download a branded PDF report and track your
-              search performance in one dashboard.
+
+            <p className="anim-left mb-8 max-w-xl text-sm text-[var(--muted)] sm:text-base" style={{ animationDelay: "0.42s" }}>
+              You get an SEO score out of 100, a mobile speed test, a crawl of up to 10 pages, and AI-written titles, descriptions, keywords, alt text and schema. Download a branded PDF report and track your search performance in one dashboard.
             </p>
-            <div className="anim-fade-up flex flex-wrap gap-4" style={{ animationDelay: "0.5s" }}>
-              <Link href="/app" className="btn-primary pulse-glow inline-flex items-center gap-2 px-7 py-4 font-medium">
+
+            <div className="anim-fade-up flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4" style={{ animationDelay: "0.5s" }}>
+              <Link href="/app" className="btn-primary pulse-glow inline-flex items-center justify-center gap-2 px-7 py-4 text-center font-medium">
                 Analyze my website <ArrowRight size={18} />
               </Link>
-              <a href="#how" className="rounded-full border border-[var(--border)] px-7 py-4 font-medium hover:bg-white/5">
+              <a href="#how" className="inline-flex items-center justify-center rounded-full border border-[var(--border)] px-7 py-4 text-center font-medium hover:bg-white/5">
                 See how it works
               </a>
             </div>
-            <div className="anim-fade-up mt-12 grid max-w-xl grid-cols-3 gap-6" style={{ animationDelay: "0.65s" }}>
+
+            <div className="anim-fade-up mt-10 grid max-w-xl grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6" style={{ animationDelay: "0.65s" }}>
               {STATS.map((s) => (
-                <div key={s.l}>
-                  <div className="text-3xl font-semibold">{s.n}</div>
+                <div key={s.l} className="min-w-0">
+                  <div className="text-2xl font-semibold sm:text-3xl">{s.n}</div>
                   <div className="text-sm text-[var(--muted)]">{s.l}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="anim-right relative z-10" style={{ animationDelay: "0.3s" }}>
-            <div className="float card bg-[#0b0b16]/90 p-6 backdrop-blur">
-              <div className="mb-4 flex items-center justify-between">
+          <div className="anim-right relative z-10 min-w-0" style={{ animationDelay: "0.3s" }}>
+            <div className="float card w-full max-w-full overflow-hidden bg-[#0b0b16]/90 p-4 backdrop-blur sm:p-6">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                 <div className="font-semibold">SEO Audit Score</div>
                 <span className="rounded-full bg-white/5 px-3 py-1 text-xs text-[var(--muted)]">Sample report</span>
               </div>
               <ScoreGauge score={78} grade="B" />
               <div className="mt-4 space-y-2">
                 {SAMPLE.map((r) => (
-                  <div key={r.n} className="flex items-center justify-between rounded-lg bg-black/30 px-4 py-2 text-sm">
+                  <div key={r.n} className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-black/30 px-3 py-2 text-sm sm:px-4">
                     <span>{r.n}</span>
                     <span className={`rounded-md px-2 py-1 text-xs font-medium ${PILL[r.s]}`}>{PILL_LABEL[r.s]}</span>
                   </div>
@@ -251,14 +263,14 @@ export default function Landing() {
       </div>
 
       {/* PROBLEM */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="The problem" sub="Most website owners are stuck on the same three problems.">
           SEO feels <Em>confusing</Em>. It should not.
         </Heading>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {PROBLEMS.map((p, i) => (
             <Reveal key={p.t} dir={DIRS3[i % 3]} delay={(i % 3) * 100} className="h-full">
-              <div className="card card-hover h-full p-6">
+              <div className="card card-hover h-full min-w-0 p-4 sm:p-6">
                 <h3 className="mb-2 font-semibold">{p.t}</h3>
                 <p className="text-sm text-[var(--muted)]">{p.d}</p>
               </div>
@@ -268,14 +280,14 @@ export default function Landing() {
       </section>
 
       {/* FEATURES */}
-      <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-20">
+      <section id="features" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="Features" sub="From finding problems to fixing them and tracking results, without switching tools.">
           Everything in <Em>one place</Em>
         </Heading>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {FEATURES.map(({ Icon, t, d, tag }, i) => (
             <Reveal key={t} dir={DIRS4[i % 4]} delay={(i % 4) * 90} className="h-full">
-              <div className="card card-hover relative h-full p-6">
+              <div className="card card-hover relative h-full min-w-0 p-4 sm:p-6">
                 {tag && (
                   <span className="absolute right-4 top-4 rounded-full bg-[var(--primary)]/20 px-3 py-1 text-xs text-[var(--primary-2)]">
                     {tag}
@@ -293,14 +305,14 @@ export default function Landing() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-20">
+      <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="How it works" sub="Four simple steps from link to fixes.">
           From link to <Em>results</Em>
         </Heading>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {STEPS.map((s, i) => (
             <Reveal key={s.t} dir={DIRS4[i % 4]} delay={i * 120} className="h-full">
-              <div className="card card-hover h-full p-6">
+              <div className="card card-hover h-full min-w-0 p-4 sm:p-6">
                 <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary)] font-semibold">
                   {i + 1}
                 </div>
@@ -313,24 +325,21 @@ export default function Landing() {
       </section>
 
       {/* SCORE GUIDE */}
-      <section id="score" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-20">
-        <Heading
-          eyebrow="Score guide"
-          sub="Your score is a quick way to see how healthy a page is. Here is what the numbers mean."
-        >
+      <section id="score" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
+        <Heading eyebrow="Score guide" sub="Your score is a quick way to see how healthy a page is. Here is what the numbers mean.">
           Understand your <Em>SEO score</Em>
         </Heading>
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
           <Reveal dir="left" className="h-full">
-            <div className="card h-full p-6">
+            <div className="card h-full min-w-0 p-4 sm:p-6">
               <h3 className="mb-4 font-semibold">Grades</h3>
               <div className="space-y-3">
                 {BANDS.map((b) => (
-                  <div key={b.g} className="flex items-start gap-4 rounded-xl bg-black/30 p-4">
+                  <div key={b.g} className="flex items-start gap-3 rounded-xl bg-black/30 p-3 sm:gap-4 sm:p-4">
                     <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#14142a] text-xl font-bold ${b.c}`}>
                       {b.g}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-sm font-medium">
                         {b.t} <span className="ml-1 text-xs font-normal text-[var(--muted)]">{b.r}</span>
                       </div>
@@ -343,7 +352,7 @@ export default function Landing() {
           </Reveal>
 
           <Reveal dir="right" className="h-full">
-            <div className="card h-full p-6">
+            <div className="card h-full min-w-0 p-4 sm:p-6">
               <h3 className="mb-4 font-semibold">How the score is calculated</h3>
               <p className="mb-4 text-sm text-[var(--muted)]">
                 Each of the 10 factors gets one of three results. Your score is the total, shown as a percentage.
@@ -354,7 +363,7 @@ export default function Landing() {
                   { s: "warning", t: "Warning", d: "Half the points. Worth fixing soon." },
                   { s: "error", t: "Error", d: "No points. Fix this first." },
                 ].map((r) => (
-                  <div key={r.t} className="flex items-center gap-3 rounded-lg bg-black/30 px-4 py-3">
+                  <div key={r.t} className="flex flex-wrap items-center gap-3 rounded-lg bg-black/30 px-3 py-3 sm:px-4">
                     <span className={`rounded-md px-2 py-1 text-xs font-medium ${PILL[r.s]}`}>{r.t}</span>
                     <span className="text-[var(--muted)]">{r.d}</span>
                   </div>
@@ -380,18 +389,18 @@ export default function Landing() {
       </section>
 
       {/* WHAT WE CHECK */}
-      <section id="checks" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-20">
+      <section id="checks" className="mx-auto max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="What we check" sub="Ten important SEO factors, explained in plain words, with a simple tip for each.">
           What we <Em>check</Em>, and how to fix it
         </Heading>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
           {CHECKS.map(({ Icon, t, d, fix }, i) => (
             <Reveal key={t} dir={DIRS2[i % 2]} delay={Math.floor(i / 2) * 80} className="h-full">
-              <div className="card card-hover flex h-full gap-4 p-5">
+              <div className="card card-hover flex h-full min-w-0 gap-4 p-4 sm:p-5">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#14142a] text-[var(--primary-2)]">
                   <Icon size={18} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h3 className="font-semibold">{t}</h3>
                   <p className="text-sm text-[var(--muted)]">{d}</p>
                   <p className="mt-2 text-xs text-[var(--primary-2)]">Fix: {fix}</p>
@@ -402,23 +411,19 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* COMPETITOR (coming soon) */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      {/* COMPETITOR */}
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         <Reveal dir="zoom">
-          <div
-            className="card grid items-center gap-8 p-8 md:p-10 lg:grid-cols-2"
-            style={{ background: "linear-gradient(135deg,#12122e,#0b0b16)" }}
-          >
-            <div>
+          <div className="card grid min-w-0 items-center gap-8 p-5 sm:p-8 md:p-10 lg:grid-cols-2" style={{ background: "linear-gradient(135deg,#12122e,#0b0b16)" }}>
+            <div className="min-w-0">
               <span className="mb-4 inline-block rounded-full bg-[var(--primary)]/20 px-3 py-1 text-xs text-[var(--primary-2)]">
                 Coming soon
               </span>
-              <h2 className="mb-3 text-3xl font-light">
+              <h2 className="mb-3 text-2xl font-light sm:text-3xl">
                 Compare with your <Em>competitors</Em>
               </h2>
-              <p className="mb-4 text-[var(--muted)]">
-                Scan your website and a competitor's side by side. See both scores, and exactly which SEO
-                factors they win on, so you know where to catch up first.
+              <p className="mb-4 text-sm text-[var(--muted)] sm:text-base">
+                Scan your website and a competitor's side by side. See both scores, and exactly which SEO factors they win on, so you know where to catch up first.
               </p>
               <ul className="space-y-2 text-sm text-[var(--muted)]">
                 {[
@@ -433,14 +438,14 @@ export default function Landing() {
                 ))}
               </ul>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {[
                 { n: "Your site", s: 78, c: "text-[var(--primary-2)]" },
                 { n: "Competitor", s: 64, c: "text-[var(--muted)]" },
               ].map((x) => (
-                <div key={x.n} className="rounded-2xl bg-black/30 p-6 text-center">
+                <div key={x.n} className="min-w-0 rounded-2xl bg-black/30 p-3 text-center sm:p-6">
                   <div className="mb-1 text-xs text-[var(--muted)]">{x.n}</div>
-                  <div className={`text-5xl font-semibold ${x.c}`}>{x.s}</div>
+                  <div className={`text-3xl font-semibold sm:text-5xl ${x.c}`}>{x.s}</div>
                   <div className="text-xs text-[var(--muted)]">Sample preview</div>
                 </div>
               ))}
@@ -450,27 +455,24 @@ export default function Landing() {
       </section>
 
       {/* HELP GUIDE */}
-      <section id="guide" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20">
-        <Heading
-          eyebrow="Help guide"
-          sub="New to SEO? Follow these five steps to go from your first report to real improvements."
-        >
+      <section id="guide" className="mx-auto max-w-3xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
+        <Heading eyebrow="Help guide" sub="New to SEO? Follow these five steps to go from your first report to real improvements.">
           How to get the <Em>most</Em> from RankBoost
         </Heading>
         <div className="space-y-3">
           {GUIDE.map(({ Icon, t, d }, i) => (
             <Reveal key={t} dir="up" delay={i * 70}>
-              <details className="card group p-5" open={i === 0}>
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
-                  <span className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#14142a] text-[var(--primary-2)]">
+              <details className="card group min-w-0 p-4 sm:p-5" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-medium [&::-webkit-details-marker]:hidden">
+                  <span className="flex min-w-0 items-center gap-3">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#14142a] text-[var(--primary-2)]">
                       <Icon size={18} />
                     </span>
                     {t}
                   </span>
-                  <span className="text-xl text-[var(--primary-2)] transition-transform group-open:rotate-45">+</span>
+                  <span className="shrink-0 text-xl text-[var(--primary-2)] transition-transform group-open:rotate-45">+</span>
                 </summary>
-                <p className="mt-3 pl-12 text-sm text-[var(--muted)]">{d}</p>
+                <p className="mt-3 pl-0 text-sm text-[var(--muted)] sm:pl-12">{d}</p>
               </details>
             </Reveal>
           ))}
@@ -478,14 +480,14 @@ export default function Landing() {
       </section>
 
       {/* AUDIENCE */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="Who it is for">
           Built for <Em>everyone</Em> who owns a website
         </Heading>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
           {AUDIENCE.map(({ Icon, t, d }, i) => (
             <Reveal key={t} dir={DIRS3[i % 3]} delay={(i % 3) * 100} className="h-full">
-              <div className="card card-hover h-full p-6">
+              <div className="card card-hover h-full min-w-0 p-4 sm:p-6">
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#14142a] text-[var(--primary-2)]">
                   <Icon size={20} />
                 </div>
@@ -498,13 +500,12 @@ export default function Landing() {
       </section>
 
       {/* HONEST EXPECTATIONS */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
+      <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
         <Reveal dir="zoom">
-          <div className="card p-8">
-            <h2 className="mb-3 text-2xl font-semibold">What to expect</h2>
-            <p className="mb-4 text-[var(--muted)]">
-              No tool can promise a number one ranking, and we will not either. RankBoost does the technical and
-              on-page SEO work quickly and clearly, which gives your site a much better chance.
+          <div className="card p-5 sm:p-8">
+            <h2 className="mb-3 text-2xl font-semibold sm:text-3xl">What to expect</h2>
+            <p className="mb-4 text-sm text-[var(--muted)] sm:text-base">
+              No tool can promise a number one ranking, and we will not either. RankBoost does the technical and on-page SEO work quickly and clearly, which gives your site a much better chance.
             </p>
             <ul className="space-y-2 text-sm">
               {[
@@ -523,17 +524,17 @@ export default function Landing() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-20">
+      <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
         <Heading eyebrow="FAQ">
           Common <Em>questions</Em>
         </Heading>
         <div className="space-y-3">
           {FAQ.map((f, i) => (
             <Reveal key={f.q} dir="up" delay={i * 60}>
-              <details className="card group p-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span className="text-xl text-[var(--primary-2)] transition-transform group-open:rotate-45">+</span>
+              <details className="card group min-w-0 p-4 sm:p-5">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-medium [&::-webkit-details-marker]:hidden">
+                  <span className="min-w-0">{f.q}</span>
+                  <span className="shrink-0 text-xl text-[var(--primary-2)] transition-transform group-open:rotate-45">+</span>
                 </summary>
                 <p className="mt-3 text-sm text-[var(--muted)]">{f.a}</p>
               </details>
@@ -543,14 +544,16 @@ export default function Landing() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="mx-auto max-w-4xl px-6 py-16">
+      <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
         <Reveal dir="zoom">
-          <div className="card p-10 text-center" style={{ background: "linear-gradient(135deg,#14143a,#0b0b16)" }}>
-            <h2 className="mb-3 text-3xl font-light md:text-4xl">
+          <div className="card p-5 text-center sm:p-10" style={{ background: "linear-gradient(135deg,#14143a,#0b0b16)" }}>
+            <h2 className="mb-3 text-2xl font-light sm:text-3xl md:text-4xl">
               Ready to see what is holding your site <span className="shimmer font-bold italic">back</span>?
             </h2>
-            <p className="mb-8 text-[var(--muted)]">Paste your link and get your SEO score and fixes in about a minute.</p>
-            <Link href="/app" className="btn-primary pulse-glow inline-flex items-center gap-2 px-8 py-4 font-medium">
+            <p className="mb-8 text-sm text-[var(--muted)] sm:text-base">
+              Paste your link and get your SEO score and fixes in about a minute.
+            </p>
+            <Link href="/app" className="btn-primary pulse-glow inline-flex items-center justify-center gap-2 px-6 py-4 text-center font-medium sm:px-8">
               Analyze my website <ArrowRight size={18} />
             </Link>
           </div>
@@ -559,14 +562,14 @@ export default function Landing() {
 
       {/* FOOTER */}
       <footer className="border-t border-[var(--border)] bg-black/30">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
-          <div className="md:col-span-2">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-4 md:gap-10">
+          <div className="min-w-0 md:col-span-2">
             <Logo withName />
             <p className="mt-4 max-w-sm text-sm text-[var(--muted)]">
-              RankBoost AI is an AI-powered SEO platform that audits your website, writes the fixes and helps you
-              track your search performance.
+              RankBoost AI is an AI-powered SEO platform that audits your website, writes the fixes and helps you track your search performance.
             </p>
           </div>
+
           <div>
             <div className="mb-4 text-sm font-semibold">Product</div>
             <ul className="space-y-2 text-sm text-[var(--muted)]">
@@ -577,6 +580,7 @@ export default function Landing() {
               <li><a href="#faq" className="hover:text-white">FAQ</a></li>
             </ul>
           </div>
+
           <div>
             <div className="mb-4 text-sm font-semibold">Company</div>
             <ul className="space-y-2 text-sm text-[var(--muted)]">
@@ -589,10 +593,11 @@ export default function Landing() {
             </ul>
           </div>
         </div>
+
         <div className="border-t border-[var(--border)]">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-5 text-xs text-[var(--muted)]">
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-4 py-5 text-xs text-[var(--muted)] sm:px-6 md:flex-row md:items-center">
             <div>© 2026 TAMx Technologies. All rights reserved.</div>
-            <div>SEO scores are RankBoost's own measure and do not guarantee Google rankings.</div>
+            <div className="max-w-2xl">SEO scores are RankBoost's own measure and do not guarantee Google rankings.</div>
           </div>
         </div>
       </footer>
