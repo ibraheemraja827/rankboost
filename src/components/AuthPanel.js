@@ -45,7 +45,7 @@ function Lamp({ on, pulled, onPull }) {
           <stop offset="100%" stopColor={ACCENT} stopOpacity="0" />
         </radialGradient>
       </defs>
-
+ 
       {/* Roshni ka cone aur farsh ka glow */}
       <g style={{ opacity: on ? 1 : 0, transition: "opacity 0.9s ease" }}>
         <polygon points="70,152 230,152 345,428 -45,428" fill="url(#lampCone)" />
@@ -178,14 +178,20 @@ export default function AuthPanel() {
   <Logo withName />
 </div>
 
-      <div className="relative mx-auto grid min-h-full max-w-6xl items-center gap-6 px-6 py-24 lg:grid-cols-2">
-        {/* Lamp */}
-        <div className="flex flex-col items-center">
-          <Lamp on={on} pulled={pulled} onPull={pull} />
-          <p className="mt-6 text-sm text-[#9a9ab5]">
-            {on ? "Pull the cord again to switch the light off" : "Pull the cord to sign in"}
-          </p>
-        </div>
+     <div className="relative mx-auto grid min-h-[100dvh] max-w-6xl items-center gap-3 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-2 lg:gap-6">
+
+  {/* Lamp */}
+  <div className="flex flex-col items-center justify-center">
+    <div className="w-[min(75vw,340px)] max-h-[55vh] [&_svg]:h-auto [&_svg]:w-full [&_svg]:max-h-[55vh]">
+      <Lamp on={on} pulled={pulled} onPull={pull} />
+    </div>
+
+    <p className="mt-3 text-sm text-[#9a9ab5]">
+      {on
+        ? "Pull the cord again to switch the light off"
+        : "Pull the cord to sign in"}
+    </p>
+  </div>
 
         {/* Login card */}
         <div
